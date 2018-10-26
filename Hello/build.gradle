@@ -1,0 +1,8 @@
+apply plugin: "java"
+apply plugin: "application"
+
+task wrapper(type:Wrapper) {
+	gradleVersion="4.10.2"
+}
+
+mainClassName="ru.sibguti.Hello"
