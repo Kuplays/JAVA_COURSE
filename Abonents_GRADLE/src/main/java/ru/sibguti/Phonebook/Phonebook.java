@@ -54,4 +54,11 @@ public class Phonebook {
 		for (int i = 0; i < users.size(); i++) 
 			System.out.println(users.get(i).toString());
 	}
+
+	public void saveToFile() {
+		Collections.sort(this.users, User.ByID);
+		for (int i = 0; i < users.size(); i++) {
+			users.get(i).toCSV();				
+		}
+	}
 }

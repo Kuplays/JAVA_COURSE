@@ -2,7 +2,7 @@ package ru.sibguti.Phonebook;
 
 import java.util.Comparator;
 
-public abstract class User  {
+public abstract class User implements CSV {
 	private static int increment = 1;
 	protected int id;
 	protected String nameDetails;
