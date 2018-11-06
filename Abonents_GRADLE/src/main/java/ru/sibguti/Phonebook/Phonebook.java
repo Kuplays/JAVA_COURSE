@@ -1,6 +1,8 @@
 package ru.sibguti.Phonebook;
 
 import java.util.*;
+import java.io.FileReader;
+import java.io.BufferedReader;
 
 public class Phonebook {
 	private ArrayList<User> users;
@@ -57,8 +59,22 @@ public class Phonebook {
 
 	public void saveToFile() {
 		Collections.sort(this.users, User.ByID);
-		for (int i = 0; i < users.size(); i++) {
-			users.get(i).toCSV();				
+		for (int i = 0; i < users.size(); i++)
+			CSV.toCSV(users.get(i));
+	}
+
+	public void fillFromFile() {
+		BufferedReader bfReader;
+		try {
+			bfReader = new BufferedReader(new FileReader("objects.csv"));
+			String ln = bfReader.readLine();
+			while(ln != null) {
+				this.users.add(CSV.fromCSV(ln));
+				ln = bfReader.readLine();
+			}
+			bfReader.close();
+		} catch(Exception ex) {
+			ex.printStackTrace();
 		}
 	}
 }
