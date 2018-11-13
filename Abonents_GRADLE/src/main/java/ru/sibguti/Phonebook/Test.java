@@ -18,8 +18,10 @@ class Test {
 	//	book.display(1);
 		book.makeCall(book.getAccountByID(5), book.getAccountByID(7), "Just a regular convo of lovers");
 		book.makeConferenceCall(book.getAccountByID(5), book.getAccountByID(7), book.getAccountByID(1));
-		book.callsLog();
-		book.confLog();
+	//	book.callsLog();
+	//	book.confLog();
+		book.callStats();
+		book.confStats();
 	//	book.displayAccountByID(1);
 	}
 }

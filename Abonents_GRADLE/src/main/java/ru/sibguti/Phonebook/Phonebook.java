@@ -9,6 +9,8 @@ public class Phonebook {
 	private ArrayList<User> users;
 	private ArrayList<Call> calls;
 	private ArrayList<Conference> confs;
+	private Statistics<Call> callsStats;
+	private Statistics<Conference> confStats;
 	
 	public Phonebook() {
 		rand = new Random();
@@ -114,5 +116,15 @@ public class Phonebook {
 	public void confLog() {
 		for (int i = 0; i < this.confs.size(); i++)
 			System.out.println(this.confs.get(i));
+	}
+
+	public void callStats() {
+		this.callsStats = new Statistics<>(this.calls);
+		this.callsStats.totalLog();
+	}
+
+	public void confStats() {
+		this.confStats = new Statistics<>(this.confs);
+		this.confStats.totalLog();
 	}
 }

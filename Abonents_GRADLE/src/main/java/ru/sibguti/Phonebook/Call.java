@@ -23,7 +23,7 @@ public class Call {
 		this.callLength = value;
 	}
 
-	public int getLength() {return this.callLength;}
+	public int getDuration() {return this.callLength;}
 	public String getDescription() {return this.callDescription;}
 
 	public String toString() {
