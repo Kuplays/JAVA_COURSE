@@ -15,6 +15,7 @@ public abstract class User {
 		this.phoneDetails = argPhone;
 	}
 	
+	public void setID(int id) {this.id = id;}
 	public void setNameDetails(String newName) {this.nameDetails = newName;}
 	public void setPhoneDetails(String newPhone) {this.phoneDetails = newPhone;}
 

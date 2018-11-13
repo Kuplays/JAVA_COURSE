@@ -5,10 +5,16 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 
 public class Phonebook {
+	private Random rand;
 	private ArrayList<User> users;
+	private ArrayList<Call> calls;
+	private ArrayList<Conference> confs;
 	
 	public Phonebook() {
+		rand = new Random();
 		this.users = new ArrayList<User>();
+		this.calls = new ArrayList<Call>();
+		this.confs = new ArrayList<Conference>();
 	}
 
 	public void setNewIndividual(String name, String phone, String snils) {
@@ -31,6 +37,11 @@ public class Phonebook {
 	private int findAccountByID(int id) {
 		Collections.sort(this.users, User.ByID);
 		return  binSearch(this.users, id, 0, this.users.size());
+	}
+
+	public User getAccountByID(int id) {
+		int index = findAccountByID(id);
+		return this.users.get(index);
 	}
 
 	public void displayAccountByID(int id) {
@@ -76,5 +87,32 @@ public class Phonebook {
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
+	}
+
+	public void makeCall(User usrA, User usrB, String descr) {
+		Call call = new Call(usrA.getId(), usrB.getId());
+		call.setLength(rand.nextInt(100));
+		call.setDescription(descr);
+		calls.add(call);
+	}
+	
+	public void makeConferenceCall(User ...users) {
+		Integer[] ids = new Integer[users.length];
+		for (int i = 0; i < users.length; i++) {
+			ids[i] = users[i].getId();
+		}
+		Conference conf = new Conference(ids);
+		conf.setDuration(rand.nextInt(100));
+		confs.add(conf);
+	}
+
+	public void callsLog() {
+		for (int i = 0; i < this.calls.size(); i++)
+			System.out.println(this.calls.get(i));
+	}
+
+	public void confLog() {
+		for (int i = 0; i < this.confs.size(); i++)
+			System.out.println(this.confs.get(i));
 	}
 }

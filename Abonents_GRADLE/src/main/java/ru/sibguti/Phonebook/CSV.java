@@ -25,9 +25,16 @@ public abstract class CSV {
 	}
 
 	static User fromCSV(String inputLine) {
+		User tmp;
 		String[] splittedData = inputLine.split("\\s+");
-		if (splittedData[0].equals("ind")) 
-			return new Individual(splittedData[1], splittedData[2], splittedData[3]);
-		return new Legal(splittedData[1], splittedData[2], splittedData[3]);
+		//for (int i = 0; i < splittedData.length; i++) System.out.print(splittedData[i]);
+		if (splittedData[0].equals("ind")) {
+			tmp = new Individual(splittedData[2], splittedData[3], splittedData[4]);
+			tmp.setID(Integer.parseInt(splittedData[1]));
+		} else {
+			tmp = new Legal(splittedData[2], splittedData[3], splittedData[4]);
+			tmp.setID(Integer.parseInt(splittedData[1]));
+		}
+		return tmp;
 	}
 }
