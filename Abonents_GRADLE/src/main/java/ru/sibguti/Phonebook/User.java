@@ -22,6 +22,7 @@ public abstract class User {
 	public int getId() {return this.id;}
 	public String getNameDetails() {return this.nameDetails;}
 	public String getPhoneDetails() {return this.phoneDetails;}
+	public abstract String getSpecificNumber();
 
 	public static Comparator<User> ByID = new Comparator<User>() {
 		public int compare(User aLeft, User aRight) {

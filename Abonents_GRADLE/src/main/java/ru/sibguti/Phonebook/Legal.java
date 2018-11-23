@@ -13,6 +13,7 @@ public class Legal extends User {
 
 	public void setTaxNumber(String val) {this.taxNumber = val;}
 	public String getTaxNumber() {return this.taxNumber;}
+	public String getSpecificNumber() {return getTaxNumber();}
 
 	public String toString() {
 		return "[ФИО: " + this.nameDetails + "\tТЕЛЕФОН: " + this.phoneDetails + "\t\tИНН:\t" + this.taxNumber + "]";

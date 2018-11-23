@@ -3,6 +3,7 @@ package ru.sibguti.Phonebook;
 import java.util.*;
 import java.io.FileReader;
 import java.io.BufferedReader;
+import java.sql.*;
 
 public class Phonebook {
 	private Random rand;
@@ -126,5 +127,36 @@ public class Phonebook {
 	public void confStats() {
 		this.confStats = new Statistics<>(this.confs);
 		this.confStats.totalLog();
+	}
+
+	public void saveToDatabase() {
+		Connection c = null;
+		Statement stmt = null;
+		
+		try {
+			Class.forName("org.sqlite.JDBC");
+			c = DriverManager.getConnection("jdbc:sqlite:phonebook.db");
+			c.setAutoCommit(false);
+			stmt = c.createStatement();
+			
+			for (int i = 0; i < this.users.size(); i++) {
+				String className = this.users.get(i).getClass().getName();
+				String type = "LEG";
+				String number = this.users.get(i).getSpecificNumber();
+				if (className.equals("ru.sibguti.Phonebook.Individual")) 
+					type = "IND";
+
+				String sql = "INSERT INTO USERS (ID,TYPE,NAME,PHONE,NUMBER)" +
+								"VALUES ('"+this.users.get(i).getId()+"', '"+type+"', '"+this.users.get(i).getNameDetails()+"', '"+this.users.get(i).getPhoneDetails()+"', '"+number+"')";
+				stmt.executeUpdate(sql);
+			}
+			stmt.close();
+			c.commit();
+			c.close();
+		} catch(Exception ex) {
+			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+			return;
+		}
+		System.out.println("USERS SAVED!");
 	}
 }
