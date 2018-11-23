@@ -44,7 +44,7 @@ class Test {
 
 	 	//book.saveToFile();
 		//User ind = CSV.fromCSV("ind Vasya 99232 99999");
-		book.fillFromFile();
+	//	book.fillFromFile();
 	//	book.display(1);
 		//book.makeCall(book.getAccountByID(5), book.getAccountByID(7), "Just a regular convo of lovers");
 		//book.makeConferenceCall(book.getAccountByID(5), book.getAccountByID(7), book.getAccountByID(1));
@@ -53,6 +53,8 @@ class Test {
 		//book.callStats();
 		//book.confStats();
 	//	book.displayAccountByID(1);
-		book.saveToDatabase();
+	//	book.saveToDatabase();
+		book.fillFromDatabase();
+		book.display(1);
 	}
 }

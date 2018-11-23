@@ -159,4 +159,39 @@ public class Phonebook {
 		}
 		System.out.println("USERS SAVED!");
 	}
+
+	public void fillFromDatabase() {
+		Connection c = null;
+		Statement stmt = null;
+		
+		try {
+			Class.forName("org.sqlite.JDBC");
+			c = DriverManager.getConnection("jdbc:sqlite:phonebook.db");
+			c.setAutoCommit(false);
+			stmt = c.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM USERS");
+			
+			User temp;			
+
+			while(rs.next()) {
+				int id = rs.getInt("ID");
+				String type = rs.getString("TYPE");
+				String name = rs.getString("NAME");
+				String phone = rs.getString("PHONE");
+				String number = rs.getString("NUMBER");
+				if (type.equals("IND")) temp = new Individual(name, phone, number);
+				else temp = new Legal(name, phone, number);
+				
+				temp.setID(id);
+				this.users.add(temp);
+			}
+			rs.close();
+			stmt.close();
+			c.close();
+		} catch(Exception ex) {
+			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+			return;
+		}
+		System.out.println("FILLED SUCCESS!");
+	}
 }
