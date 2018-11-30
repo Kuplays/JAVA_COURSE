@@ -56,5 +56,8 @@ class Test {
 	//	book.saveToDatabase();
 		book.fillFromDatabase();
 		book.display(1);
+		Utilizer.backup("phonebook.db");
+		Utilizer.backup("objects.csv");
+		Utilizer.backup("build.gradle");
 	}
 }
