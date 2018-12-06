@@ -20,10 +20,10 @@ public class MyThread implements Runnable {
 	
 	public MyThread(Socket sock) {
 		this.socketClient = sock;
-		address = "";
-		content = "";
 	//	responseHeader = "HTTP/1.1 OK 200\r\nContent-Type: text/html\r\nContent-Length: 128\r\n";
 		try {
+			address = "";
+			content = "";
 			this.inputStream = this.socketClient.getInputStream();
 			this.outputStream = this.socketClient.getOutputStream();
 		} catch(Exception ex) {
@@ -31,11 +31,12 @@ public class MyThread implements Runnable {
 		}	
 	}
 
+
 	public void run() {
 		addressLineScanner = new Scanner(inputStream);
 		addrFromStream = addressLineScanner.nextLine().split(" ");
 		
-		if (addrFromStream[1].equals("/")) address = "index.html";
+		if (addrFromStream[1].equals("/")) address = "html/index.html";
 		else address = addrFromStream[1].substring(1, addrFromStream[1].length());
 		
 		try {
@@ -50,12 +51,11 @@ public class MyThread implements Runnable {
 			ex.printStackTrace();
 		}
 		
-		responseHeader = "HTTP/1.1 OK 200\r\nContent-Type: text/html\r\nContent-Length: " + String.valueOf(content.length()) + "\r\n";
+		responseHeader = "HTTP/1.1 OK 200\r\nContent-Type: text/html\r\nContent-Length: " + String.valueOf(content.length()) + "\r\n\r\n";
 		String fullResponse = responseHeader + content;
 		outWriter = new PrintWriter(outputStream, true);
 		outWriter.println(fullResponse);
-		System.out.println(fullResponse);
-	//	outWriter.flush();
+		System.out.println(content);
 		address = "";
 		content = "";
 	}
