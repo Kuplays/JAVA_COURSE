@@ -51,7 +51,7 @@ public class MyThread implements Runnable {
 			ex.printStackTrace();
 		}
 		
-		responseHeader = "HTTP/1.1 OK 200\r\nContent-Type: text/html\r\nContent-Length: " + String.valueOf(content.length()) + "\r\n\r\n";
+		responseHeader = "HTTP/1.1 OK 200\r\nContent-Type: text/html; text/css\r\nContent-Length: " + String.valueOf(content.length()) + "\r\n\r\n";
 		String fullResponse = responseHeader + content;
 		outWriter = new PrintWriter(outputStream, true);
 		outWriter.println(fullResponse);
