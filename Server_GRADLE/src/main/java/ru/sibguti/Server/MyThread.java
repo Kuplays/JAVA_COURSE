@@ -37,7 +37,9 @@ public class MyThread implements Runnable {
 		addrFromStream = addressLineScanner.nextLine().split(" ");
 		
 		if (addrFromStream[1].equals("/")) address = "html/index.html";
-		else address = addrFromStream[1].substring(1, addrFromStream[1].length());
+		else address = "html/" + addrFromStream[1].substring(1, addrFromStream[1].length());
+
+        System.out.println("ADDRESS: " + address);
 		
 		try {
 			fileStream = new FileInputStream(address);
