@@ -3,8 +3,15 @@ package ru.sibguti.Phonebook;
 import java.lang.reflect.*;
 import java.sql.*;
 
+/**
+* Main Test class
+*/
 class Test {
 
+	/**
+	* Utility function to create database or tables
+	* Not needed
+	*/
 	public static void create() {
 		Connection c = null;
 		Statement stmt = null;
@@ -31,7 +38,10 @@ class Test {
 	}
 
 	
-	
+	/**
+	* Main function
+	* @param args Command line arguments
+	*/
 	public static void main(String[] args) {
 	//	create();
 		Phonebook book = new Phonebook();

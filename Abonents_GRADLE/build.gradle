@@ -5,6 +5,11 @@ task wrapper(type:Wrapper) {
 	gradleVersion="4.10.2"
 }
 
+javadoc {
+	source =  sourceSets.main.allJava
+	classpath = configurations.compile
+}
+
 repositories {
 	mavenCentral()
 }

@@ -3,7 +3,17 @@ package ru.sibguti.Phonebook;
 import java.io.FileReader;
 import java.io.FileWriter;
 
+
+/**
+* Class to work with CSV functons Abstract
+*/
 public abstract class CSV {
+	
+	/**
+	* Saves given user to CSV file
+	* @param user Given user from User class and its children
+	* @return Returns 0 on success
+	*/
 	static int toCSV(User user) {
 		String className = user.getClass().getName();
 		
@@ -24,6 +34,11 @@ public abstract class CSV {
 		return 0;
 	}
 
+	/**
+	* Composes new User from User class and its children from CSV file
+	* @param inputLine String line that was read from CSV file for decomposition
+	* @return Returns new user depends on user type
+	*/
 	static User fromCSV(String inputLine) {
 		User tmp;
 		String[] splittedData = inputLine.split("\\s+");
