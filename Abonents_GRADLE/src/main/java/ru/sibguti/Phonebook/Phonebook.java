@@ -4,7 +4,7 @@ import java.util.*;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.sql.*;
-
+import org.apache.log4j.Logger;
 
 /**
 * Phonebook class
@@ -12,6 +12,7 @@ import java.sql.*;
 * @version 1.0
 */
 public class Phonebook {
+	private static final Logger log = Logger.getLogger(Phonebook.class);
 	private Random rand;
 	private ArrayList<User> users;
 	private ArrayList<Call> calls;
@@ -37,6 +38,7 @@ public class Phonebook {
 	* @param snils SNILS number
 	*/
 	public void setNewIndividual(String name, String phone, String snils) {
+		log.debug("Individual instantiated");
 		this.users.add(new Individual(name, phone, snils));
 	}
 
@@ -47,6 +49,7 @@ public class Phonebook {
 	* @param taxNumber Tax Number
 	*/
 	public void setNewLegal(String name, String phone, String taxNumber) {
+		log.debug("Legal instantiated");
 		this.users.add(new Legal(name, phone, taxNumber));
 	}
 
