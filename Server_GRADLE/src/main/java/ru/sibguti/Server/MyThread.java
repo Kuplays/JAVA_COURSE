@@ -11,19 +11,20 @@ public class MyThread implements Runnable {
 	private Socket socketClient;
 	private InputStream inputStream;
 	private OutputStream outputStream;
-	private Scanner addressLineScanner, fileScanner;
-	private FileInputStream fileStream;
+	private Scanner addressLineScanner;
 	private PrintWriter outWriter;
-	String address, addrFromStream[];
-	String content, responseHeader;
+	private String address;
+	private String addrFromStream[];
+	private PageParser page; //Page Related work
+	private Client cl;
 	
 	
-	public MyThread(Socket sock) {
-		this.socketClient = sock;
-	//	responseHeader = "HTTP/1.1 OK 200\r\nContent-Type: text/html\r\nContent-Length: 128\r\n";
+	public MyThread(Client parsedClient) {
+		this.cl = parsedClient;
+		this.socketClient = cl.getSocket();
+
 		try {
 			address = "";
-			content = "";
 			this.inputStream = this.socketClient.getInputStream();
 			this.outputStream = this.socketClient.getOutputStream();
 		} catch(Exception ex) {
@@ -31,34 +32,18 @@ public class MyThread implements Runnable {
 		}	
 	}
 
-
 	public void run() {
 		addressLineScanner = new Scanner(inputStream);
 		addrFromStream = addressLineScanner.nextLine().split(" ");
 		
 		if (addrFromStream[1].equals("/")) address = "html/index.html";
 		else address = "html/" + addrFromStream[1].substring(1, addrFromStream[1].length());
-
-        System.out.println("ADDRESS: " + address);
 		
-		try {
-			fileStream = new FileInputStream(address);
-			fileScanner = new Scanner(fileStream);
-			
-			while(fileScanner.hasNextLine())
-				content += fileScanner.nextLine();
-			fileStream.close();
-			
-		} catch(Exception ex) {
-			ex.printStackTrace();
-		}
-		
-		responseHeader = "HTTP/1.1 OK 200\r\nContent-Type: text/html; text/css\r\nContent-Length: " + String.valueOf(content.length()) + "\r\n\r\n";
-		String fullResponse = responseHeader + content;
+		page = new PageParser(address);
+		page.setHeaderOne(cl.toString());
 		outWriter = new PrintWriter(outputStream, true);
-		outWriter.println(fullResponse);
-		System.out.println(content);
-		address = "";
-		content = "";
+		outWriter.println(page.toString());
+		System.out.println(page.toString());
+		page.resetContent();
 	}
 }

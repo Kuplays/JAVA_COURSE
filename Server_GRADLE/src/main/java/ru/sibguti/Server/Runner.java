@@ -3,28 +3,15 @@ package ru.sibguti.Server;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.io.*;
+import java.util.Scanner;
 
 public class Runner {
 	public static void main(String argv[]) {
-//		try {
-//		ServerSocket serv = new ServerSocket(8080);
-//		Socket cs = serv.accept();
-//		PrintWriter out = new PrintWriter(cs.getOutputStream(), true);
-//		BufferedReader in = new BufferedReader(new InputStreamReader(cs.getInputStream()));
-//		out.println("<html><body>gggg</body></html>");
-//		out.close();
-//		serv.close();
-//		} catch(Exception e) {}
-
-//		ServerSocket server;
-///		Socket client;
-//		Runnable runnable;
-//		Thread thread;
-
 		try {
-			ServerSocket server = new ServerSocket(8080);
+			ServerSocket server = new ServerSocket(8888);
 			while(true) {
-				Socket client = server.accept();
+				Client client = new Client();
+				client.setSocket(server);
 				Runnable runnable = new MyThread(client);
 				Thread thread = new Thread(runnable);
 				thread.start();
