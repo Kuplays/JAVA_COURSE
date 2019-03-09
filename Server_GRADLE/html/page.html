@@ -15,33 +15,19 @@
   				<input type="button" onclick="process()" value="Submit">
 			</form>
 
-			<select id="lbox">
-			</select>
-
 			<script type="text/javascript">
 				function process() {
-					$.post("http://localhost:8000/server.php",
-					  {
-					    p1: $("#nameField").val(),
-					    p2: $("#ageField").val()
-					  },
-  					onAjaxSuccess
-					);
- 
-					function onAjaxSuccess(data) {
-					 	addToList(data);
-					}
+					var name = $("#nameField").val();
+					$.ajax
+					({
+						url:'/server.php',
+						data: name,
+						type: 'post',
+						success: function(data) {
+							alert(data);
+						}
+					})
 				}
-
-				function addToList(data) {
-    				var opt = document.createElement("option");
-    				document.getElementById("lbox").options.add(opt);
-    				opt.text = data;
-    				document.getElementById("lbox").options.add(opt);
-
-    				return false;
-				}
-
 			</script>
 		</div>
 	</body>
