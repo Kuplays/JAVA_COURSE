@@ -8,9 +8,10 @@ public class Base {
 
 	public Base() {
 		this.links = new ArrayList<Link>();
+		fillFromDB();
 	}
 
-	public static List<Link> getLinks() {
+	private void fillFromDB() {
 		Connection conn = null;
 		Statement stmt = null;
 
@@ -34,10 +35,11 @@ public class Base {
 			stmt.close();
 			conn.close();
 		} catch(Exception ex) {
-			System.out.println("ERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
 			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
 		}
+	}
 
+	public static List<Link> getLinks() {
 		return links;
 	}
 }

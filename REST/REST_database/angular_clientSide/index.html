@@ -1,0 +1,38 @@
+<!doctype html>
+<html ng-app="angular-app">
+	<head>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
+		<title>REST CONSUMED ANGULAR TEST</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    	<script src="angularApp.js"></script>
+
+    	<style type="text/css">
+    		h1 {
+    			text-align: center;
+    		}
+    		.mainBlock {
+    			width: 400px;
+    			margin: auto;
+    		}
+    		.childElem {
+    			border-radius: 25px;
+  				background: #73AD21;
+  				padding: 20px;
+  				margin-bottom: 5px; 
+    		}
+    	</style>
+
+	</head>
+
+	<body>
+		<h1>LIST OF LINKS</h1>
+		<div ng-controller="data-handler" class="mainBlock">
+			<div ng-repeat="item in data" class="childElem">
+				<p>Author: {{item.name}}</p>
+				<p>Date: {{item.date}}<p>
+				Link: <a href="{{item.link}}">{{item.link}}</a><br>
+			</div>
+		</div>
+	</body>
+</html>
