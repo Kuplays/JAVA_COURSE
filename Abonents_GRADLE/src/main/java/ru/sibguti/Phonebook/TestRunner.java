@@ -6,7 +6,7 @@ import java.sql.*;
 /**
 * Main Test class
 */
-class Test {
+class TestRunner {
 
 	/**
 	* Utility function to create database or tables

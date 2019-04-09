@@ -214,6 +214,10 @@ public class Phonebook {
 		this.confStats.totalLog();
 	}
 
+	public List<User> getUsers() {
+		return this.users;
+	}
+
 	/**
 	* Outputs current state of Phonebook to database
 	*/
